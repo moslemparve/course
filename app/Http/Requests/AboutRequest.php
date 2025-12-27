@@ -32,6 +32,7 @@ class AboutRequest extends FormRequest
     {
         return [
             'name.required' => 'The name field is required custom messages.',
+            'age.required' => 'The age field is required custom messages.',
         ];
     }
 }
