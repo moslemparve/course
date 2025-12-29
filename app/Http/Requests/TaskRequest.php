@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AboutRequest extends FormRequest
+class TaskRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,17 +22,8 @@ class AboutRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|max:255',
-            'age' => 'required|integer|min:0'
-        ];
-    }
-
-
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'The name field is required custom messages.',
-            'age.required' => 'The age field is required custom messages.',
+            'title' => 'required|string|max:255',
+            'description' => 'required|string'
         ];
     }
 }

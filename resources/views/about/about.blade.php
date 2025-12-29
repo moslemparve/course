@@ -118,16 +118,16 @@
                     <form action="{{ route('about.post') }}" method="post">
                         @csrf
                         <div>
-                            <label for="name">Name</label>
-                            <input type="text" name="name" value="{{ old('name') }}">
-                            @error('name')
+                            <label for="title">Title</label>
+                            <input type="text" name="title" value="{{ old('title') }}">
+                            @error('title')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
                         <div style="margin-top: 20px;">
-                            <label for="age">Age</label>
-                            <input type="text" name="age" value="{{ old('age') }}">
-                            @error('age')
+                            <label for="description">Description</label>
+                            <textarea name="description" id="">{{ old('description') }}</textarea>
+                            @error('description')
                                 <div class="text-red-500">{{ $message }}</div>
                             @enderror
                         </div>
