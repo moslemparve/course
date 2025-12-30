@@ -7,5 +7,5 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/about/us/page', [TaskController::class, 'index'])->name('about');
+Route::get('/about/us/', [TaskController::class, 'index'])->name('about');
 Route::post('post/about', [TaskController::class, 'store'])->name('about.post');

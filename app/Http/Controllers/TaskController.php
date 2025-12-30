@@ -8,7 +8,10 @@ use App\Http\Requests\TaskRequest;
 class TaskController extends Controller
 {
     public function index(){
-        return view('about.about');
+        // $tasks = Task::latest()->get(['title']);
+        // $tasks = Task::where('id', '>', 2)->get();
+        $tasks = Task::all();
+        return view('about.about', compact('tasks'));
     }
 
     public function store(TaskRequest $request){
