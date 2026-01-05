@@ -15,11 +15,11 @@
     <div class="alert alert-success">
         {{ session()->get('success') }}
     </div>
-@endif
+    @endif
   <h2>Create Record</h2>
   <a href="{{ route('task.index') }}">Back to Tasks </a>
 
-  <form action="{{ route('task.store') }}" method="post">
+  <form action="{{ route('task.store') }}" method="post" enctype="multipart/form-data">
     @csrf
     <div class="form-group">
       <label for="title">title:</label>
@@ -32,6 +32,13 @@
       <label for="description">Description:</label>
       <input type="text" class="form-control" name="description" value="{{ old('description') }}">
       @error('description')
+      <div class="alert alert-danger">{{ $message }}</div>
+      @enderror
+    </div>
+    <div class="form-group">
+      <label for="image">image:</label>
+      <input type="file" class="form-control" name="image" value="{{ old('image') }}">
+      @error('image')
       <div class="alert alert-danger">{{ $message }}</div>
       @enderror
     </div>

@@ -19,8 +19,19 @@ class TaskController extends Controller
         return view('tasks.create');
     }
     public function store(TaskRequest $request){
-        Task::create($request->validated());
-        return redirect()->route('task.index')->with('success', 'Task created successfully.');
+
+        $image = $request->file('image'); // get file 
+        $fileName = time().'-'.$image->getClientOriginalName(); // get file name
+        // $fileName = time().'-'.$image->getClientOriginalExtention(); // get file extention
+        $destinationPath = public_path('uploads/tasks'); // define uplod directory public_path to access public folder
+         $image->move($destinationPath, $fileName); // file store in folder
+
+        Task::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'image' => $fileName
+        ]);
+        return redirect()->back()->with('success', 'Task created successfully.');
     }
 
     public function edit($id){
