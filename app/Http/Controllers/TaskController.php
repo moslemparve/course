@@ -18,8 +18,8 @@ class TaskController extends Controller
     public function create(){
         return view('tasks.create');
     }
-    public function store(TaskRequest $request){
-
+    public function store(TaskRequest $request){ // dependency injection
+        dd($request->storeOrUpdate());
         $image = $request->file('image'); // get file 
         $fileName = time().'-'.$image->getClientOriginalName(); // get file name
         // $fileName = time().'-'.$image->getClientOriginalExtention(); // get file extention
@@ -42,9 +42,35 @@ class TaskController extends Controller
     }
 
     public function update(TaskRequest $request, $id){
+        dd($request->storeOrUpdate());
+
+         $data = [
+        'title' => $request->title,
+        'description' => $request->description,
+    ];
         $task = Task::findOrFail($id);
-        $task->update($request->validated());
-        return redirect()->route('task.index')->with('success', 'Task updated successfully.');
+
+    // Check if a new image is uploaded
+    if ($request->hasFile('image')) {
+        $image = $request->file('image');
+        $fileName = time() . '-' . $image->getClientOriginalName();
+        $destinationPath = public_path('uploads/tasks');
+
+        // Move new image
+        $image->move($destinationPath, $fileName);
+
+        // Optional: delete old image
+        if ($task->image && file_exists($destinationPath . '/' . $task->image)) {
+            unlink($destinationPath . '/' . $task->image);
+        }
+
+        $data['image'] = $fileName;
+    }
+
+    // Update task
+    $task->update($data);
+        // $task->update($request->validated());
+        return redirect()->back()->with('success', 'Task updated successfully.');
     }
 
     public function show($id){
