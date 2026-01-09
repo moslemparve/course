@@ -35,9 +35,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ms-auto">
-                        @auth
-                            <div>logged In</div>
-                        @endauth
+                      
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
@@ -79,8 +77,6 @@
             @yield('content')
         </main>
     </div>
-    <div>
-        footer
-    </div>
+   
 </body>
 </html>

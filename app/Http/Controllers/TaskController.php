@@ -19,7 +19,7 @@ class TaskController extends Controller
         return view('tasks.create');
     }
     public function store(TaskRequest $request){ // dependency injection
-        dd($request->storeOrUpdate());
+        // dd($request->storeOrUpdate());
         $image = $request->file('image'); // get file 
         $fileName = time().'-'.$image->getClientOriginalName(); // get file name
         // $fileName = time().'-'.$image->getClientOriginalExtention(); // get file extention

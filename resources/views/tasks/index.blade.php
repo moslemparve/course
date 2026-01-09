@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-</head>
-<body>
+
+@extends('layouts.app')
+@section('content')
 
 <div class="container">
   @if(session()->has('success'))
@@ -37,14 +29,50 @@
               <div class="btn-group" role="group" aria-label="Basic example">
               <a href="{{ route('task.edit', $task->id) }}" class="btn btn-secondary">Edit</a>
               <a href="{{ route('task.show',$task->id) }}" class="btn btn-secondary">View</a>
-              <a href="{{ route('task.delete',$task->id) }}" class="btn btn-secondary">Delete</a>
+              <button type="button" class="btn btn-secondary" onclick="deleteTask({{ $task->id }})">Delete</button>
             </div>
             </td>
+            {{-- <form id="delete-form-{{ $task->id }}" action="{{ route('task.delete',$task->id) }}" method="post">
+              @csrf
+            </form> --}}
         </tr>
         @endforeach
     </tbody>
   </table>
 </div>
+<script>
+  function deleteTask(id) {
+    SwalAlert.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      // document.getElementById('delete-form-' + id).submit();
+      axios.post('/task/delete/' + id, {
+        _token: '{{ csrf_token() }}'
+      })
+      .then(function (response) {
+        console.log(response);
+        // location.reload();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      SwalAlert.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+      });
+    }
+  });
 
-</body>
-</html>
+    
+  }
+
+</script>
+@endsection
