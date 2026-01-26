@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Task;
+use App\Models\User;
 use App\Http\Requests\TaskRequest;
 class TaskController extends Controller
 {
     public function index(){
         // $tasks = Task::latest()->get(['title']);
         // $tasks = Task::where('id', '>', 2)->get();
-        $tasks = Task::all();
+        $users = User::with(['profile','tasks'])->get();
+        return $users;
         return view('tasks.index', compact('tasks'));
     }
 
@@ -19,17 +20,10 @@ class TaskController extends Controller
         return view('tasks.create');
     }
     public function store(TaskRequest $request){ // dependency injection
-        // dd($request->storeOrUpdate());
-        $image = $request->file('image'); // get file 
-        $fileName = time().'-'.$image->getClientOriginalName(); // get file name
-        // $fileName = time().'-'.$image->getClientOriginalExtention(); // get file extention
-        $destinationPath = public_path('uploads/tasks'); // define uplod directory public_path to access public folder
-         $image->move($destinationPath, $fileName); // file store in folder
 
         Task::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $fileName
         ]);
         return redirect()->back()->with('success', 'Task created successfully.');
     }

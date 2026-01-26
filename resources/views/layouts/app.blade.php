@@ -67,6 +67,9 @@
                                     </form>
                                 </div>
                             </li>
+                            <li class="nav-item dropdown">
+                                <a href="{{ route('users.profile') }}" class="nav-link">Profile</a>
+                            </li>
                         @endguest
                     </ul>
                 </div>

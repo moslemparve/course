@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\{  TaskController, HomeController};
 
@@ -20,3 +21,6 @@ Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name(
 Route::get('admin',function(){
     return view('admin');
 });
+
+Route::get('user/profile',[ProfileController::class,'show'])->name('users.profile');
+Route::post('user/profile/update',[ProfileController::class,'update'])->name('user.profile.update');
