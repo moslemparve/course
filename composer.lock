@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "4776810dc1f9cc2ee65b6526f0091af8",
+    "content-hash": "b12ae2f0dfb38df40fb33cb243ce2fff",
     "packages": [
         {
             "name": "brick/math",
@@ -2184,6 +2184,69 @@
                 }
             ],
             "time": "2026-01-02T08:56:05+00:00"
+        },
+        {
+            "name": "moslemparve/webex-connect-laravel",
+            "version": "v1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/moslemparve/laravel-webex-connect.git",
+                "reference": "50b687d0ca3328cd25280852e73e8a7f7ea83a84"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/moslemparve/laravel-webex-connect/zipball/50b687d0ca3328cd25280852e73e8a7f7ea83a84",
+                "reference": "50b687d0ca3328cd25280852e73e8a7f7ea83a84",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^7.0",
+                "illuminate/support": "^10.0|^11.0|^12.0",
+                "php": "^8.1"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^8.0|^9.0",
+                "phpunit/phpunit": "^10.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "aliases": {
+                        "WebexConnect": "moslemparve\\WebexConnect\\Facades\\WebexConnect"
+                    },
+                    "providers": [
+                        "moslemparve\\WebexConnect\\WebexConnectServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "moslemparve\\WebexConnect\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Moslem Parve",
+                    "email": "moslemparve@gmail.com"
+                }
+            ],
+            "description": "Laravel package for Webex Connect SMS and OTP integration",
+            "keywords": [
+                "laravel",
+                "otp",
+                "sms",
+                "webex",
+                "webex-connect"
+            ],
+            "support": {
+                "issues": "https://github.com/moslemparve/laravel-webex-connect/issues",
+                "source": "https://github.com/moslemparve/laravel-webex-connect/tree/v1.0.1"
+            },
+            "time": "2026-01-30T07:54:01+00:00"
         },
         {
             "name": "nesbot/carbon",

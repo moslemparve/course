@@ -16,6 +16,7 @@
         <th>Id</th>
         <th>Title</th>
         <th>Description</th>
+        <th>Created By</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -25,6 +26,7 @@
             <td>{{ $task->id }}</td>
             <td>{{ $task->title }}</td>
             <td>{{ $task->description }}</td>
+            <td>{{ $task->user->name }}</td>
             <td>
               <div class="btn-group" role="group" aria-label="Basic example">
               <a href="{{ route('task.edit', $task->id) }}" class="btn btn-secondary">Edit</a>

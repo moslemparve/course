@@ -3,15 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Models\{User, Task};
 use App\Http\Requests\TaskRequest;
+use Auth;
 class TaskController extends Controller
 {
     public function index(){
-        // $tasks = Task::latest()->get(['title']);
+        $tasks = Task::with(['user'])->get();
         // $tasks = Task::where('id', '>', 2)->get();
-        $users = User::with(['profile','tasks'])->get();
-        return $users;
+        // $tasks = User::with(['profile','tasks'])->get();
+        // return $tasks;
         return view('tasks.index', compact('tasks'));
     }
 
@@ -21,10 +22,13 @@ class TaskController extends Controller
     }
     public function store(TaskRequest $request){ // dependency injection
 
-        Task::create([
-            'title' => $request->title,
-            'description' => $request->description,
-        ]);
+        Auth::user()->tasks()->create($request->validated());
+        // dd(Auth::user());
+        // Task::create([
+        //     'title' => $request->title,
+        //     'description' => $request->description,
+        //     'user_id' => Auth::id(),
+        // ]);
         return redirect()->back()->with('success', 'Task created successfully.');
     }
 
@@ -68,7 +72,8 @@ class TaskController extends Controller
     }
 
     public function show($id){
-        $task = Task::findOrFail($id);
+        $task = Task::findOrFail($id)->with('user')->first();
+        return $task;
         return view('tasks.show', compact('task'));
     }   
     public function destroy($id){
