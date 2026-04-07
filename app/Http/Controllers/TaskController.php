@@ -84,7 +84,7 @@ class TaskController extends Controller
 
     public function search(Request $request){
         $search = $request->query('search_task');
-        $tasks = Task::where('title', 'like', '%' . $search . '%')->get();
+        $tasks = Task::with('user')->where('title', 'like', '%' . $search . '%')->get();
         return response()->json( $tasks);
     }
 }
