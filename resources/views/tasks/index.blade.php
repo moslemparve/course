@@ -11,11 +11,9 @@
   <h2>Basic Table</h2>
   <a href="{{ route('task.create') }}">Add Task</a>
   <div>
-    <form action="{{ route('task.index') }}" method="get">
       <div class="input-group mb-3">
         <input type="text" class="form-control" placeholder="Search by title" name="search" onkeyup="SearchTask()" value="{{ request()->query('search') }}">
       </div>
-    </form>
   </div>
   <table class="table">
     <thead>
