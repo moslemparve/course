@@ -15,6 +15,7 @@ Route::get('/task/edit/{id}', [TaskController::class, 'edit'])->name('task.edit'
 Route::post('/task/update/{id}', [TaskController::class, 'update'])->name('task.update');
 Route::get('task/show/{id}', [TaskController::class, 'show'])->name('task.show');
 Route::post('task/delete/{id}', [TaskController::class, 'destroy'])->name('task.delete');
+Route::get('task/search', [TaskController::class, 'search'])->name('task.search');
 Auth::routes();
 
 Route::get('/home', [HomeController::class, 'index'])->middleware('auth')->name('home');

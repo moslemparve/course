@@ -73,12 +73,18 @@ class TaskController extends Controller
 
     public function show($id){
         $task = Task::findOrFail($id)->with('user')->first();
-        return $task;
+        // return $task;
         return view('tasks.show', compact('task'));
     }   
     public function destroy($id){
         $task = Task::find($id)->delete();
         // $task->delete();
         return redirect()->back()->with('success', 'Task deleted successfully.');
+    }
+
+    public function search(Request $request){
+        $search = $request->query('search_task');
+        $tasks = Task::where('title', 'like', '%' . $search . '%')->get();
+        return response()->json( $tasks);
     }
 }
